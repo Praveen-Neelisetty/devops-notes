@@ -1,0 +1,153 @@
+Are we able to get to know sir If Graphics is not there means 
+why because we can visually see and we know what we are doing 
+if you are having Graphics...
+by seeing only black screen will it won't be hard? will we get clarity?
+
+DevSecOps ga manam petukovacha andi? -> done
+Doubt Sessions --> mere vastara -> done
+
+Tue,Wed,Thur --> Siva QA Sessions -> done
+
+Sat,Sun --> Other person QA Sessions -> done
+
+0.0.0.0/0 ante? -> done
+
+Jenkins --> Gitlab lo kuda Implement chesi --> done (same implementation but different syntax)
+
+LinkedIn lo Onsite (USA) ani vuntundi kada andi, so dani meaning direct ga USA lo veli work chayacha?
+
+Last Question --> AI mana Jobs Replace chayadu kada, like mana day to day life lo integrate avtundi crt...
+like DevOps Evergreen kada and AI vala na job podu kada ante. ---> done
+
+linux commands lo -t, -l, -> done
+
+Coding is asking in LinkedIn -> done
+
+SRE kuda apply chayacha andi mee course baga nerchukoni  -> done
+
+AWS Bills every month 1st pay chayala?  -> done
+
+=================================================================================================
+08/04/2024: 
+
+Why mysql-server? why not mysqlDB
+And systemctl start mysqld why not mysqlDB
+mysql_secure_installation --set-root-pass ExpenseApp@1
+Sometimes network change issue geeting
+daemon user?
+why not w-get used?
+npm install lo --> packaes.json ela read chesindi and packaes.json manam rayala aa format lo?
+GIT Directories ela andi? like /etc/, /bin/, 
+:wq! or :wq diff?
+meru start nodejs kakunda start 
+=================================================================================================
+10/04/2024:
+
+Root access istara andi or only for experience persons?
+will every project having seperate AMI sir in Real Time also?
+How to write Package.json
+Scehma/bacend.sql Devops engineer will create?
+Password ala direct ga istunaru kada so meku oka 
+sir no need of Systemctl Restart backend after schema?
+ps -ef | grep nodejs --> ki ani kaunda only backend ye ravali ante oka command cheparu I forgot?
+Apache Tomcat also same aa andi process?
+Anni softwares ani RHEL -9 ki upgrade chestara andi like new version release chesatru then?
+/api/transaction lo em vundi andi?
+.online and .com service diff vuntunda like fast or slow ?
+what is nameservers?
+========================================================================
+12/04/2024:
+
+In vim /etc/systemd/system/backend.service --> 
+
+[Unit]
+Description = Backend Service
+
+[Service]
+User=expense
+Environment=DB_HOST="<MYSQL-SERVER-IPADDRESS>"
+ExecStart=/bin/node /app/index.js
+SyslogIdentifier=backend
+
+[Install]
+WantedBy=multi-user.target
+
+-> what is "WantedBy" and what is multi-user.target
+-> what are the necessary fields and what we need to give.
+
+In vim /etc/nginx/default.d/expense.conf ->
+
+proxy_http_version 1.1;
+
+location /api/ { proxy_pass http://localhost:8080/; }
+
+location /health {
+  stub_status on;
+  access_log off;
+}
+
+-> what is "stub_status" and what is access_log off.
+-> what is proxy_http_version 1.1.
+
+-> Sir you are saying ".com" TLD should maintain what is the IP address of joindevops.com. 
+but IP Address will not be same right it will vary right?
+
+-> What is the Use of HardLink and SoftLink
+========================================================================
+no need to give USERNAME = echo "plaese enter username" ?
+No need to give int NUMBER = 10? -i 
+
+======================================================================
+Diff b/w expense.conf(frontend) and backend.service(backend)?
+
+Telnet Connection is good but Status is getting Failed. And ps -ef lo nodejs is working.
+
+======================================================================
+Sir if code is same how to do in this scenario and SIcne starting we need to remove but again and again no need right
+
+Password wrong type
+
+Zip File download no issue anaru kada so vuna file over ride avtunda?
+
+SQl data ekada save avtundi ?
+
+$$ ans $! diff 
+======================================================================
+In FrontEnd --> include /etc/nginx/default.d/*.conf (and) include /etc/nginx/conf.d/*.conf
+(1) -> # Load modular configuration files from the /etc/nginx/conf.d directory.
+(2) -> # Load configuration files for the default server block. (can you say difference)
+
+In which cases we will use these? default.d (vs) conf.d --> refer FrontEnd Git
+======================================================================
+
+1) 17th file --> dnf install ngninx
+-> dnf install mysql --> but mysql-server right?
+
+-> and another question --> LOGFILE name
+
+-> sudo find / -wholename "*/usr/share/nginx/html*" --> (I got result But I want in which file it is there) /usr/share/nginx/html
+
+-> when I am giving show datases in server not getting
+
+->  mysql_secure_installation -h db.praveen.store -u root -p ${MySqlPassword} -e 'show databases' &>>LOGFILE  for me no output
+=============================================
+and meru git lo ki push chaykpoina work ela avtundi sir? Just AWS CLI connection icharu kabati automatic ga work avtunda?
+
+sir in "protocal" you had given "tcp", but in my case if we are having more than one protocols to follow means how to give in this case?
+
+Sir meru vars ani pedite teskuntda sir? like manam shell lo source ./<file- name> her no need aa sir
+
+Sir Gitignore lo meru .tfvars, .tf ivani ignore cheste meru terraform apply lo adi work avali ante depency vundi kada sir?
+
+Sir Multiple times chsinapudu file ni plan cheste idempotancy vuntunda
+
+provider.tf lo -->   region = "us-east-1" ante north vergenia code sir?
+
+AWS lo Terraform entidi sir?
+
+inputs outputs ki diff enti?
+
+AWS ki credits raaychu anaru kada andulo format vunte share chayagalara and eni credits points adagachu sir like 1 credit = enta rupess
+
+
+

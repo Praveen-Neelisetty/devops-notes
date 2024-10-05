@@ -1,0 +1,12 @@
+Experience with Linux server admin activities lie user, service, package, network and process management.
+Experience with Linux editors like vim. 
+Experience in using public, private configurating them to the servers.
+Experience in Shell Scripting
+Experience in Shell Scripting by Automating Server Commands installing Packages, Cloning, Softwares into EC-2 Instances
+Experience in Trouble shooting the Networking (netstat -lntp, ps -ef, telnet etc...)
+Experience in DNS Resolution Concepts
+Experience with Special Variables in Shell Scripting
+Experience in Shell Scripting Concepts
+// Need o write on Ansible and Terraform and VPC
+
+

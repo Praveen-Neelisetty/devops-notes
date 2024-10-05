@@ -1,0 +1,26 @@
+For backend:
+===========
+
+Disable Default
+Enable nodejs:20
+install nodejs
+user add - expense
+create directory - /app
+download code from s3 bucket and keep in /tmp/backend
+unzip code from /tmp/backend to /app
+download npm dependencies 
+need to add backend.service
+daemon-reload
+install mysql
+Schema load from sql
+restart and enable backend service
+
+------------------------------------------------------
+For Mysql:
+==========
+
+Install MySQL-Server
+Start and Enable MySQL-Server
+install python Mysql Dependencies to execute with Ansible
+Verify whether Mysql password setup or not --> ignore_errors=true
+Get the Output of above and based on that setup the password

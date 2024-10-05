@@ -1,0 +1,151 @@
+Q) what is teraaform-Provisioners?
+A) Terraform provisioners are used to execute scripts or commands on a local or remote machine as part of the resource creation or destruction process. They allow you to perform additional configuration steps that aren't directly managed by Terraform, such as installing software, configuring services, or running shell scripts.
+
+### Key Points About Terraform Provisioners
+
+1. **Types of Provisioners**:
+   - **`local-exec`**: Executes a command on the machine running Terraform (i.e., your local machine or CI/CD environment).
+   - **`remote-exec`**: Executes a command on a remote resource, typically an instance created by Terraform, such as an AWS EC2 instance.
+
+2. **Usage**:
+   - **For Initialization**: You can use provisioners to set up an instance after it's been created. For example, installing software on an EC2 instance.
+   - **For Cleanup**: You can also run commands during the destruction of a resource using `provisioner "destroy"`, allowing you to perform cleanup tasks before the resource is deleted.
+
+3. **Example of `local-exec` Provisioner**:
+
+   resource "aws_instance" "example" {
+     ami           = "ami-12345678"
+     instance_type = "t2.micro"
+
+     provisioner "local-exec" {
+       command = "echo ${self.public_ip} > ip_address.txt"
+     }
+   }
+
+   - This `local-exec` provisioner runs a command on the local machine, writing the instance's public IP to a file called `ip_address.txt`.
+
+4. **Example of `remote-exec` Provisioner**:
+
+   resource "aws_instance" "example" {
+     ami           = "ami-12345678"
+     instance_type = "t2.micro"
+
+     provisioner "remote-exec" {
+       inline = [
+         "sudo apt-get update",
+         "sudo apt-get install -y nginx",
+       ]
+
+       connection {
+         type     = "ssh"
+         user     = "ubuntu"
+         private_key = file("~/.ssh/id_rsa")
+         host     = self.public_ip
+       }
+     }
+   }
+
+   - This `remote-exec` provisioner connects to the EC2 instance via SSH and runs commands to update the package list and install NGINX.
+
+5. **Important Considerations**:
+   - **Provisioners are a last resort**: Terraform encourages managing infrastructure as code, and it's generally better to avoid using provisioners in favor of configuration management tools (e.g., Ansible, Chef) or cloud-init scripts.
+   - **Dependency on SSH or WinRM**: `remote-exec` provisioners depend on SSH (for Linux) or WinRM (for Windows), which means the instance must be accessible over the network.
+   - **Error Handling**: If a provisioner fails, Terraform marks the resource as tainted, which may cause Terraform to attempt to destroy and recreate it on the next `apply`. You can control this behavior using `on_failure = continue` or `on_failure = fail`.
+
+### Summary
+
+Terraform provisioners are powerful but should be used sparingly. They help execute commands during resource creation or destruction, allowing for custom configuration and management steps that aren't directly handled by Terraform.
+
+=================================
+To create: for i in 01-vpc/ 02-sg/ 03-bastion /04-db /05-vpn/ 06-app-alb/ ; do cd $i; terraform init; terraform apply ----------
+auto-approve ; cd.. ; done
+
+for -reconfigure: for i in 01-vpc/ 02-sg/ 04-db/ 05-vpn/ 06-app-alb/; do cd $i; terraform init -reconfigure; terraform 
+----------------- 
+apply -auto-approve; cd..; done
+
+To destroy: for i in $(ls -dr */) ; do echo ${i%/}; cd  ${i%/} ; terraform destroy -auto-approve ; cd .. ; done
+-----------
+
+=================================
+Git Repository: if .terraform files got added into GitHub by mistake if you forget to keep ".gitignore" file 
+---------------
+rm -rf
+
+git init
+
+git branch -M main
+
+Connect to GitHub
+Go to GitHub and create a new repository.
+
+Choose a name and set it as public or private as per your preference.
+Do not initialize the repository with a README (since you've already created the project locally).
+
+git remote add origin https://github.com/yourusername/repositoryname.git
+eg: git remote add origin https://github.com/Praveen-Neelisetty/expense-infra-dev.git
+
+
+git add . ; git commit -m "expense-terraform-dev"; git push -u origin main
+=================================
+
+Session 36: 
+-----------
+
+Backend
+--------------------
+1. create EC2 instance first
+2. connect to the server using null resource and remote exec.
+3. copy the script into instance.
+4. run ansible configuration
+5. stop the server
+6. take AMI
+7. delete the server
+	aws configure
+	aws
+8. target group creation
+9. launch template
+10. autoscaling and policy
+11. listener rule
+	
+match the declared configuration with actual configuration
+
+actual configuration of server
+server state --> terminated
+declared state --> create the server
+
+
+userdata
+---------------------
+once ec2 instance created, aws will run userdata script.
+
+1. we have to login inside instance and check the logs,
+2. once userdata is changed, AWS will not update EC2
+	delete EC2 manually and run terrafrom again
+	
+remote provisoner
+---------------------
+execute the scripts in remote servers
+ansible-playbook -i <inventory> <yaml-name> -e var=value --> ansible server
+
+to connect to open vpn: --> ssh -i ~/.ssh/openvpn openvpnas@<ip-address>
+
+ansible pull
+--------------
+install ansible in remote node
+ansible-pull -i <inventory> <ansible-playbook-git-url> <yaml-name> -e var=value --> remote node
+
+Session: 36 --> 58 min --> Pause preparing for Switch for Xamarin Form(05-10-2024) <---
+
+========================================================================================================================
+Projects:
+---------
+
+https://github.com/akhileshmishrabiz/Devops-zero-to-hero
+
+Interview Exp:
+-------------
+
+https://www.youtube.com/watch?v=ewmPYHZyxgM
+
+Data User: https://www.youtube.com/watch?v=oSIgFaMXHJs

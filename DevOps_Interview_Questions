@@ -1,0 +1,152 @@
+Interview Questions: 
+
+1) How Firewall/Security Groups are configurated and how you know your projects are secured or not 
+A) We will accept only connections from the required Instances. And that too with <Private-Ip Address> within the 
+network...(refer session-6 --> 01:04:02) 
+eg: Only From FronEnd Instance only we need to connect to USER EC2, so that other public can' connect directly.
+
+Q) what is inode?
+A) inode stores the file metadata actually. 
+
+2)What is the difference b/w Softlink and Hardlink?
+A) Refer Session - 8 AWS-78s : 58:12 Timeline.
+
+3) What are specal characters?
+A) 	
+
+echo "All variables: $@"
+echo "Number of variables passed: $#"
+echo "Script Name: $0"
+echo "Current working directory: $PWD"
+echo "Home directory of current user: $HOME"
+echo "Which user is running this script: $USER"
+echo "Hostname: $HOSTNAME"
+echo "Process ID of the current shell script: $$" 
+sleep 60 & #now i want process ID of this script which is running in background
+echo "Process ID of last background command: $!"
+echo "Exit status of the previous command: $?" sudo sh 12-installing-multi-packages.sh mysql git gcc fail2ban
+
+4) What is Exit Status?
+A) $? --> to check the status of Previous command
+0 --> success, other than 0 everything is failure
+
+5) What is Idempotent ? -> refer Session 12 (Starting)
+
+6) Difference between Reverse Proxy and Forward Proxy (Session - 7 - 48:30 time)
+A) Forward Proxy --> Means Server ki exact Client evaro teledhu
+Reverse Proxy --> Client ki exact Server evaro teledhu (client doesn't know from which server getting response/data)
+
+7) Other Scripts (Session-13 starting)
+
+8) How to delete Old Log File?
+A) Session-13 Middle and Final Timeline
+
+9) Monitor memory of the server using shell script?
+
+10) (In Interview by Sharing screen) - Given a doc file, count the number of each word ?
+
+11) What is Crontab?
+A) Refer DevOps.txt file ---> line 791...
+
+12) How to get Date,Time with Hours-Minutes-seconds?
+A) date +F%-%H-%M-%S ---> (Output) --> 2024-04-28-01-10-22
+
++F% --> to get Date in YYYY-MM-DD format
+%H  --> to get HourTime 
+
+13) Interviewer : You lost both PEM and PPk file how will you try to connect to your Instance ?
+A) Create a role > select Ec2 >search for  “managed instance core”  select it > again search for “ ssmf “  > and click on create a role
+Attach the iam role to the instances you want to login
+Got to management and governance > click on  “AWS systems manager”  > under drop down select “ Sessions Manager  ” > start session > her you will see you server > Select the server you wanted to login and start session.
+Run the below commands
+-         Bash
+-         Sudo su –
+-         Nano etc/ssh/sshd_config
+-         Come down and search for “password authentication disabled “
+-         change it to "PasswordAuthentication yes
+-         Save and Exit
+-          sudo service ssh restart
+-         Set a password for the user you want to use to log in: sudo passwd username
+Connect to the instance using SSH: ssh username@instance_ip. When prompted, enter the password you set for the user.
+
+14) Shell vs Command --> Shell is Slower than Command?
+A) Refer Youtube also. - Session 19 1st half
+Simple commands without the need of shell variables, environment and features like redirections, pipes, & go for command module.
+
+#If we need to run complex commands or scripts go for shell module.
+
+# Whatever works in command module, it will work in shell module, but vice versa is not true.
+
+15) How do you call other scripts from your shell scripts?
+A) Session-13 starting.
+
+There are 2 Ways
+a) 1st way --> ./<script-name>.sh
+--------------
+variable values will not change after calling other script..
+PID of two scripts are different
+Therefore: 1. changes happened in other script will not affect current script,
+2. PID of 2 scripts are different
+
+b) 2nd way --> source ./<script-name>.sh
+-------------
+variable values changes after calling other script
+PID of 2 scripts are same...
+Therefore: 1. changes happened in other script will be reflected in current script,
+2. PID of2 scripts are same.
+
+16) Handle Error ?
+A) Session-13 middle, set -e (will capture that error like simply neglect that error and continue the flow).
+if you wnat to track the line no. along with Shell command then -->
+
+handle_error()
+{
+    echo "Error occured at line number: $1, error command: $2"
+}
+
+trap 'handle_error ${LINENO} "$BASH_COMMAND"' ERR
+
+17) Delete the Old Logs files?
+A) Sesssion- 13 last , In My Git--> shell-script (Repository) --> 16-delete-old-logs.sh
+-----
+18) What is Ansible role?
+A) Role is a proper structure of variables, tasks, templates, handlers, etc. Using Roles we can re use the code...(Session-19 Begining)
+
+19) What are Handlers in Ansible ?
+A) Session-19 middle, 
+
+20) What is adhoc command in ansible?
+
+A) it is ansible command line to run modules against nodes directly, instead of playbooks. some urgency purposes.
+eg: ansible -i 172.31.16.150, all -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping
+
+21) What is Ansible vault?
+A)  
+
+22) What is Remote state in Terraform?
+A) If you keep the terraform.tfstate in local then there is a chance of duplicate resources (or) errors will come and there is no locking mechanism so we need to use definetly a remote state in collabatration environment so that one person is creating infrastructure it will be lock, another person is not able to create or do any chances in the infrastructure.
+
+23)How to select element from a list in terraform? (Some functions in Terraform)
+
+A) element retrieves a single element from a list. ==> element(list, index)
+
+(a) //assume I am having "2" public_subnet
+list --> aws_subnet.public_subnet[*].id
+index --> count.index
+=> element(aws_subnet.public[*].id, count.index)
+
+
+(b) slice, (c) length
+
+24) What is null_resource in terraform?
+A) null_resource will not create any resources/infrastructure in the provider but this is useful to run local-exec, remote-exec and some files.
+
+25) how to copy file from local to ec2 instance terraform?
+A) by using the Terraform file provisioner
+
+provisioner "file" { # copy file from local to ec2 instance by file provisioner 
+    source      = "${var.common_tags.Component}.sh"      # backend.sh
+    destination = "/tmp/${var.common_tags.Component}.sh" # /tmp/backend.sh
+  }
+  
+26) 
